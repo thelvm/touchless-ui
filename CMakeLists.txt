@@ -10,7 +10,8 @@ SET(PKG_MODULES
 FIND_PACKAGE(PkgConfig REQUIRED)
 pkg_check_modules(PKGS REQUIRED ${PKG_MODULES})
 
-SET(LEAP_SDK_DIR /home/lucas/leapSDK/2.3.1)
+SET(LEAP_SDK_DIR ~/leapSDK/2.3.1)
+SET(TOUCHLESS_API_DIR ~/Documents/software_project/Code/touchless-api)
 
 SET(SOURCES
         src/main.cpp
@@ -21,7 +22,7 @@ SET(SOURCES
 
 
 LINK_LIBRARIES(
-        /home/lucas/Documents/software_project/Code/gesture_parser_api/lib/libgesture_parser.a
+        ${TOUCHLESS_API_DIR}/lib/libtouchless.a
         ${CMAKE_THREAD_LIBS_INIT}
         ${PKGS_LIBRARIES}
         ${LEAP_SDK_DIR}/lib/x64/libLeap.so
@@ -33,7 +34,7 @@ ADD_EXECUTABLE(touchless-ui ${SOURCES})
 TARGET_INCLUDE_DIRECTORIES(touchless-ui PUBLIC
         "${LEAP_SDK_DIR}/include"
         "${CMAKE_CURRENT_SOURCE_DIR}/include"
-        "/home/lucas/Documents/software_project/Code/gesture_parser_api/include"
+        "${TOUCHLESS_API_DIR}/include"
         "${PKGS_INCLUDE_DIRS}"
 )
 
